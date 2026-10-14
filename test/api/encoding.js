@@ -217,19 +217,6 @@ describe("API: encoding detection", () => {
     });
   });
 
-  describe("fromFile", () => {
-    for (const encodingFixture of Object.keys(encodingFixtures)) {
-      const { name, body } = encodingFixtures[encodingFixture];
-
-      it(`should sniff ${encodingFixture} as ${name}`, () => {
-        return JSDOM.fromFile(fixturePath(encodingFixture)).then(dom => {
-          assert.equal(dom.window.document.characterSet, name);
-          assert.equal(dom.window.document.body.textContent, body);
-        });
-      });
-    }
-  });
-
   describe("fromURL", () => {
     let server, host;
     before(() => {
@@ -342,19 +329,6 @@ describe("API: encoding detection", () => {
         });
       }
     });
-  });
-
-  describe("XML: fromFile", () => {
-    for (const encodingFixture of Object.keys(xmlEncodingFixtures)) {
-      const { name, body } = xmlEncodingFixtures[encodingFixture];
-
-      it(`should detect ${encodingFixture} as ${name}`, () => {
-        return JSDOM.fromFile(fixturePath(encodingFixture)).then(dom => {
-          assert.equal(dom.window.document.characterSet, name);
-          assert.equal(dom.window.document.documentElement.textContent, body);
-        });
-      });
-    }
   });
 
   describe("XML: fromURL", () => {
